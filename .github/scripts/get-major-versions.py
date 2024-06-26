@@ -35,12 +35,18 @@ def get_tags(image_name, namespace):
     return all_tags
 
 def get_major_version_from_tags(tags):
-    for tag in tags:
-        match = re.search('^\\d+-\\w+$', tag)
-        if match:
-            version = match.group(0).split('-')
-            return version[0], version[1]
+    match = match_version_from_tags(tags, '^\\d+-\\w+$')
+    if match:
+        version = match.split('-')
+        return version[0], version[1]
     return None, None
+
+def match_version_from_tags(tags, pattern):
+    for tag in tags:
+        match = re.search(pattern, tag)
+        if match:
+            return match.group(0)
+    return None
 
 def get_digest_versions(image_name, namespace):
     tags = get_tags(image_name, namespace)
@@ -74,8 +80,9 @@ def get_major_versions(image_name, namespace):
         m_version, os_version = get_major_version_from_tags(digest_info["Tags"])
         if m_version not in major_versions:
             major_versions[m_version] = {}
+        ordered_tags=sorted(digest_info["Tags"], key=lambda x: (-len(x), x))
         if os_version not in major_versions[m_version]:
-            major_versions[m_version][os_version] = {'name': "-".join([m_version, os_version]), 'tags': digest_info["Tags"], 'platforms': [], 'meta': {'images': []}}
+            major_versions[m_version][os_version] = {'name': match_version_from_tags(ordered_tags, '^\\d+(\\.\\d+){0,2}-\\w+$'), 'tags': ordered_tags, 'platforms': [], 'meta': {'images': []}}
         major_versions[m_version][os_version]["platforms"].append(digest_info["OS/Arch"])
         major_versions[m_version][os_version]["meta"]["images"].append({'digest': digest, 'platform': digest_info["OS/Arch"]})
     return major_versions
