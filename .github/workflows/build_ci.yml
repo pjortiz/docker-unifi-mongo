@@ -5,7 +5,7 @@ on:
     - cron: '0 0 * * *'  # This runs the action every 24 hours
 
 env:
-  REGISTRY_IMAGE: portiz93/unifi-mongo
+  REGISTRY_IMAGE: ${{ vars.DOCKERHUB_USERNAME }}/unifi-mongo
 
 jobs:
   get-latest-build-info:
