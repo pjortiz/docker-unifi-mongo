@@ -95,10 +95,12 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           push: ${{ vars.PUSH_TO_DOCKERHUB }}
-          platforms: |
-            ${{ matrix.platforms }}
-          tags: |
-            ${{ matrix.tags }}
+          platforms: |-
+            ${{ join(matrix.platforms, '
+            ') }}
+          tags: |-
+            ${{ join(matrix.tags, '
+            ') }}
           build-args: |
             MONGO_VERSION=${{ matrix.name }}
 
