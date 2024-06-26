@@ -3,7 +3,7 @@ ARG MONGO_VERSION
 FROM docker.io/mongo:${MONGO_VERSION}
 
 # Copy all scripts and give then execution permistions
-COPY --chmod=755 ./scripts/init-mongo /scripts
+COPY --chmod=755 ./scripts /scripts
 
 # Make the directory incase it doesn't exist
 RUN mkdir -p /docker-entrypoint-initdb.d
