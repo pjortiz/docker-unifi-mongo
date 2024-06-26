@@ -1,0 +1,19 @@
+{
+    "name": "3-stretch",
+    "tags": [
+        "3-stretch",
+        "3.6-stretch",
+        "3.6.11-stretch"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:27d820d7098b15b0d6068602829923e6c4b41bcf0ade658ed0c1870c1de92cb8",
+                "platform": "linux/amd64"
+            }
+        ]
+    }
+}
