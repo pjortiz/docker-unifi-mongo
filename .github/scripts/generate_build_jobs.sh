@@ -17,7 +17,7 @@ strategy="$(
 			echo "$build_info_file does not exist!" >&2
 			exit 1 # fast fail if file missing
 		fi
-		cat $build_info_file | jq -c
+		cat $build_info_file | jq -c --arg image "$REGISTRY_IMAGE" '.tags |= map($image + ":" + .)'
 	done | jq -cs '{ "fail-fast": false, matrix: { include: . } }'
 )"
  

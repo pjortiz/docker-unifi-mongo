@@ -18,7 +18,7 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v5
       with:
         python-version: '3.12'
     - name: Install Python dependencies
@@ -69,6 +69,7 @@ jobs:
         jq . <<<"$strategy" # sanity check / debugging aid
         echo "strategy_created=true" >> "$GITHUB_OUTPUT"
       env:
+        REGISTRY_IMAGE: ${{ env.REGISTRY_IMAGE }}
         UPDATED_BUILD_INFO_FILES: ${{ needs.get-latest-build-info.outputs.updated_build_info_files }}
 
   build:
@@ -105,6 +106,6 @@ jobs:
             MONGO_VERSION=${{ matrix.name }}
       - name: Push README
         run: |
-          docker pushrm ${{ vars.PUSH_TO_DOCKERHUB }}
+          docker pushrm ${{ env.REGISTRY_IMAGE }}
 
       
