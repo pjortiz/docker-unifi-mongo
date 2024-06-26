@@ -1,0 +1,98 @@
+name: Build CI
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # This runs the action every 24 hours
+
+env:
+  REGISTRY_IMAGE: portiz93/unifi-mongo
+
+jobs:
+  get-latest-build-info:
+    runs-on: ubuntu-latest
+    outputs:
+      build_info_updated: ${{ steps.updates.outputs.build_info_updated }}
+      updated_build_info_files: ${{ steps.updates.outputs.updated_build_info_files }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.12'
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r .github/scripts/requirements.txt
+    - name: Run get-major-versions script
+      run: python .github/scripts/get-major-versions.py -i mongo --disable_windows --min_major 3 --max_major 7 --allowed_arch amd64 arm64
+    - name: Check for updates
+      id: updates
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git add build_info/*
+        if git diff --cached --exit-code; then
+          echo "No changes to commit"
+          echo "build_info_updated=false" >> "$GITHUB_OUTPUT"
+        else
+          echo "Changes detected"
+          echo "build_info_updated=true" >> "$GITHUB_OUTPUT"
+          (echo "updated_build_info_files<<EOF" && echo "$(git diff --name-only --cached | grep 'build_info/.*build_info.json')" && echo "EOF" ) >> "$GITHUB_OUTPUT"
+        fi
+    - name: Commit and push build_info changes
+      if: steps.updates.outputs.build_info_updated == 'true'
+      run: |
+        git commit -m 'Update build_info \n'
+        # git push origin main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  generate-build-jobs:
+    needs: get-latest-build-info
+    if: needs.get-latest-build-info.outputs.build_info_updated == 'true'
+    runs-on: ubuntu-latest
+    outputs:
+      strategy_created: ${{ steps.generate-build-jobs.outputs.strategy_created }}
+      strategy: ${{ steps.generate-build-jobs.outputs.strategy }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Run generate_build_jobs script
+      id: generate-build-jobs
+      run: |
+        strategy="$(.github/scripts/generate_build_jobs.sh)"
+        echo "strategy=$strategy" >> "$GITHUB_OUTPUT"
+        jq . <<<"$strategy" # sanity check / debugging aid
+        echo "strategy_created=true" >> "$GITHUB_OUTPUT"
+      env:
+        UPDATED_BUILD_INFO_FILES: ${{ needs.get-latest-build-info.outputs.updated_build_info_files }}
+
+  build:
+    needs: generate-build-jobs
+    if: needs.generate-build-jobs.outputs.strategy_created == 'true'
+    strategy: ${{ fromJson(needs.generate-build-jobs.outputs.strategy) }}
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ vars.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          platforms: ${{ matrix.platforms }}
+          push: ${{ vars.PUSH_TO_DOCKERHUB }}
+          tags: ${{ matrix.tags }}
+          build-args: |
+            MONGO_VERSION=${{ matrix.name }}
+
+      
