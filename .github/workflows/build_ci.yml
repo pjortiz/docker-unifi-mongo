@@ -44,7 +44,7 @@ jobs:
     - name: Commit and push build_info changes
       if: steps.updates.outputs.build_info_updated == 'true'
       run: |
-        git commit -m 'Update build_info \n'
+        git commit -m 'Update build_info [Build CI]'
         git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -59,6 +59,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
+    - name: Pull latest
+      run: git pull origin main
     - name: Run generate_build_jobs script
       id: generate-build-jobs
       run: |
@@ -78,6 +80,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Pull latest
+        run: git pull origin main
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
