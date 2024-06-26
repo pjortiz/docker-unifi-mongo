@@ -1,6 +1,7 @@
 name: Build CI
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '0 0 * * *'  # This runs the action every 24 hours
 
