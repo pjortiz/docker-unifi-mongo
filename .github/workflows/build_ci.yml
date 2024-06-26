@@ -96,7 +96,8 @@ jobs:
         with:
           platforms: ${{ matrix.platforms }}
           push: ${{ vars.PUSH_TO_DOCKERHUB }}
-          tags: ${{ matrix.tags }}
+          tags: |
+            ${{ matrix.tags }}
           build-args: |
             MONGO_VERSION=${{ matrix.name }}
 

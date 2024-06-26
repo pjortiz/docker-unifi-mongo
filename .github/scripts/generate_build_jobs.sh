@@ -29,8 +29,6 @@ if [[ "$(echo "$strategy" | jq '.matrix.include | length')" != "$count" ]]; then
 	exit 1
 fi
 
-echo "strategy: $strategy"  >&2 # output on stderr for debuging aid
-
 if [ -t 1 ]; then
 	jq <<<"$strategy"
 else
