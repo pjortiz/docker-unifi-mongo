@@ -11,6 +11,7 @@
 		- [Create the volume](#create-the-volume)
 		- [Run the MongoDB container](#run-the-mongodb-container)
 - [Build Your Own Image](#build-your-own-image)
+	- [Adding your own scripts](#adding-your-own-scripts)
 
 _______________________________________
 
@@ -91,3 +92,7 @@ _______________________________________
 ```bash
 docker build -t unifi-mongo:6.0.15 --build-arg MONGO_VERSION=6.0.15 . 
 ```
+
+### Adding your own scripts
+
+If you need a custom script based on your needs. After forking/clone this repo create a directory under `scripts` with your specific Mongo version tag (e.g. `scripts/6.0.15`), then add your script(s) in that new directory. Then run the above build command with your specific version.
