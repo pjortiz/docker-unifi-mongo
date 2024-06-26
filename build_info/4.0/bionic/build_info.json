@@ -1,0 +1,25 @@
+{
+    "name": "4-bionic",
+    "tags": [
+        "4.4.6",
+        "4.4.6-bionic",
+        "4.4-bionic",
+        "4-bionic"
+    ],
+    "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:d9ddf3df31941d30ee486ad5d2337283f0a02f68dbc5092319e24d3a541dbddd",
+                "platform": "linux/amd64"
+            },
+            {
+                "digest": "sha256:aa3f99f22e195adee9071152b4c87536f795c21ca233eeb3a28ca33af72ec1d6",
+                "platform": "linux/arm64"
+            }
+        ]
+    }
+}
