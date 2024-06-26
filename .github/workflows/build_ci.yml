@@ -104,8 +104,5 @@ jobs:
             ') }}
           build-args: |
             MONGO_VERSION=${{ matrix.name }}
-      - name: Push README
-        run: |
-          docker pushrm ${{ env.REGISTRY_IMAGE }}
 
       
