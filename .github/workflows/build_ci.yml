@@ -103,5 +103,8 @@ jobs:
             ') }}
           build-args: |
             MONGO_VERSION=${{ matrix.name }}
+      - name: Push README
+        run: |
+          docker pushrm ${{ vars.PUSH_TO_DOCKERHUB }}
 
       
