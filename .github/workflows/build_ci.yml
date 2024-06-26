@@ -45,7 +45,7 @@ jobs:
       if: steps.updates.outputs.build_info_updated == 'true'
       run: |
         git commit -m 'Update build_info \n'
-        # git push origin main
+        git push origin main
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
