@@ -1,0 +1,19 @@
+{
+    "name": "3.6.7-jessie",
+    "tags": [
+        "3.6.7-jessie",
+        "3.6-jessie",
+        "3-jessie"
+    ],
+    "platforms": [
+        "linux/amd64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:b9406b8a16ec467ecd21c8d1208973c985c7f6a21afe3505f59bae7c9904126f",
+                "platform": "linux/amd64"
+            }
+        ]
+    }
+}
