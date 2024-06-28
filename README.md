@@ -5,13 +5,14 @@
 - [Quick reference](#quick-reference)
 - [About](#about)
 - [Usage](#usage)
-	- [Docker Compose](#docker-compose)
-	- [Docker CLI](#docker-cli)
-		- [Create the network](#create-the-network)
-		- [Create the volume](#create-the-volume)
-		- [Run the MongoDB container](#run-the-mongodb-container)
+  - [Docker Compose](#docker-compose)
+  - [Docker CLI](#docker-cli)
+    - [Create the network](#create-the-network)
+    - [Create the volume](#create-the-volume)
+    - [Run the MongoDB container](#run-the-mongodb-container)
 - [Build Your Own Image](#build-your-own-image)
-	- [Adding your own scripts](#adding-your-own-scripts)
+  - [Adding your own scripts](#adding-your-own-scripts)
+- [Disclaimer](#disclaimer)
 
 _______________________________________
 
@@ -46,6 +47,8 @@ services:
     image: portiz93/unifi-mongo:${MONGO_VERSION:-6.0.15}    # Required MONGO_VERSION, Default "6.0.15", specify whatever Mongo version tag you need. DO NOT set 'latest' tag
     container_name: unifi-mongo-db
     environment:
+      # - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root}                    # Required only if using mongodb version < 6.0, otherwise do not set (See official Mongo image)
+      # - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:?Root Password Required}  # Required only if using mongodb version < 6.0, otherwise do not set  (See official Mongo image)
       - MONGO_USER=${MONGO_USER:-unifi}                     # Default "unifi"
       - MONGO_PASS=${MONGO_PASS:?Mongo Password Required}   # Required
       - MONGO_DBNAME=${MONGO_DBNAME:-unifi}                 # Default "unifi"
@@ -97,3 +100,7 @@ docker build -t unifi-mongo:6.0.15 --build-arg MONGO_VERSION=6.0.15 .
 ### Adding your own scripts
 
 If you need a custom script based on your needs. After forking/clone this repo create a directory under `scripts` with your specific Mongo version tag (e.g. `scripts/6.0.15`), then add your script(s) in that new directory. Then run the above build command with your specific version.
+
+## Disclaimer
+
+I have not validated any of the images as to whether they are working as expected apart from the image(s) I use myself. Please create an issue and I will see if I can address/accommodate your needs.
