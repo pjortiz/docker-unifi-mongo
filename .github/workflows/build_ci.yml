@@ -95,8 +95,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
-          attests: type=provenance,mode=max
-          push: ${{ vars.PUSH_TO_DOCKERHUB }}
+          push: true
+          provenance: mode=max
+          sbom: true
           platforms: |-
             ${{ join(matrix.platforms, '
             ') }}

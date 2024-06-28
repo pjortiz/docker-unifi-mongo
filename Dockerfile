@@ -11,16 +11,16 @@ RUN mkdir -p /docker-entrypoint-initdb.d
 
 # Dynamicaly choose script(s) based on provided MONGO_VERSION
 RUN if [ -d "/scripts/${MONGO_VERSION}" ] && [ "$(ls -A /scripts/${MONGO_VERSION})" ]; then \
-        echo "Setting init script(s) from '/scripts/${MONGO_VERSION}'..." \
+        echo "Setting init script(s) from '/scripts/${MONGO_VERSION}'...";\
         cp -r /scripts/${MONGO_VERSION}/* /docker-entrypoint-initdb.d/; \
     elif [ "${MONGO_VERSION%%.*}" -le 4 ] && [ -d "/scripts/3-4" ]; then \
-        echo "Setting init script(s) from '/scripts/3-4'..." \
+        echo "Setting init script(s) from '/scripts/3-4'..."; \
         cp -r /scripts/3-4/* /docker-entrypoint-initdb.d/; \
     elif [ "${MONGO_VERSION%%.*}" -eq 5 ] && [ -d "/scripts/5" ]; then \
-        echo "Setting init script(s) from '/scripts/5'..." \
+        echo "Setting init script(s) from '/scripts/5'..."; \
         cp -r /scripts/5/* /docker-entrypoint-initdb.d/; \
     elif [ "${MONGO_VERSION%%.*}" -ge 6 ] && [ -d "/scripts/6+" ]; then \
-        echo "Setting init script(s) from '/scripts/6+'..." \
+        echo "Setting init script(s) from '/scripts/6+'..."; \
         cp -r /scripts/6+/* /docker-entrypoint-initdb.d/; \
     fi
 
