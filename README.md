@@ -2,6 +2,7 @@
 
 ## Table of Contents <!-- omit in toc -->
 
+- [Latest Major Version ](#latest-major-version-)
 - [Quick reference](#quick-reference)
 - [About](#about)
 - [Usage](#usage)
@@ -13,6 +14,14 @@
 - [Build Your Own Image](#build-your-own-image)
   - [Adding your own scripts](#adding-your-own-scripts)
 - [Disclaimer](#disclaimer)
+
+_______________________________________
+
+## Latest Major Version [![Build CI](https://github.com/pjortiz/docker-unifi-mongo/actions/workflows/build_ci.yml/badge.svg)](https://github.com/pjortiz/docker-unifi-mongo/actions/workflows/build_ci.yml)
+
+| 3.x | 4.x | 5.x | 6.x | 7.x |
+| - | - | - | - | - |
+|![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F3.0%2Fjessie%2Fbuild_info.json&query=%24.name&label=tag)<br>![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F3.0%2Fstretch%2Fbuild_info.json&query=%24.name&label=tag)<br>![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F3.0%2Fxenial%2Fbuild_info.json&query=%24.name&label=tag)|![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F4.0%2Fbionic%2Fbuild_info.json&query=%24.name&label=tag)<br>![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F4.0%2Ffocal%2Fbuild_info.json&query=%24.name&label=tag)<br>![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F4.0%2Fxenial%2Fbuild_info.json&query=%24.name&label=tag)|![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F5.0%2Ffocal%2Fbuild_info.json&query=%24.name&label=tag)|![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F6.0%2Ffocal%2Fbuild_info.json&query=%24.name&label=tag)<br>![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F6.0%2Fjammy%2Fbuild_info.json&query=%24.name&label=tag)|![Dynamic JSON Badge](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fpjortiz%2Fdocker-unifi-mongo%2Fmain%2Fbuild_info%2F7.0%2Fjammy%2Fbuild_info.json&query=%24.name&label=tag)|
 
 _______________________________________
 
