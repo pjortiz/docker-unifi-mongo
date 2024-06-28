@@ -25,7 +25,7 @@ _______________________________________
 
 ## About
 
-This image is packaged with the require mongo init script to set up [linuxserver/unifi-network-application](https://hub.docker.com/r/linuxserver/unifi-network-application).
+This image is packaged with the required mongo init script to set up [linuxserver/unifi-network-application](https://hub.docker.com/r/linuxserver/unifi-network-application).
 
 _______________________________________
 
