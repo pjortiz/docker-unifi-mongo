@@ -22,8 +22,9 @@ RUN if [ -d "/scripts/${MONGO_VERSION}" ] && [ "$(ls -A /scripts/${MONGO_VERSION
     elif [ "${MONGO_VERSION%%.*}" -ge 6 ] && [ -d "/scripts/6+" ]; then \
         echo "Setting init script(s) from '/scripts/6+'..." \
         cp -r /scripts/6+/* /docker-entrypoint-initdb.d/; \
-    fi \
-    ls -ls
+    fi
+
+RUN ls -ls /docker-entrypoint-initdb.d/
 
 # Clean up
 RUN rm -rf /scripts
