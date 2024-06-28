@@ -1,8 +1,7 @@
-LABEL org.opencontainers.image.authors="Peter Ortiz (https://github.com/pjortiz)"
-
 # MONGO_VERSION cannot be Latest
 ARG MONGO_VERSION
 FROM docker.io/mongo:${MONGO_VERSION}
+LABEL org.opencontainers.image.authors="Peter Ortiz (https://github.com/pjortiz)"
 
 # Copy all scripts and give then execution permistions
 COPY --chmod=755 ./scripts /scripts
