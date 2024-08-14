@@ -11,18 +11,18 @@
         "7"
     ],
     "platforms": [
-        "linux/amd64",
-        "linux/arm64"
+        "linux/arm64",
+        "linux/amd64"
     ],
     "meta": {
         "images": [
             {
-                "digest": "sha256:24ecfe95bbb98cd49e1d968c204515d4033ef86621e68ce148cf1d0a5a0f8a82",
-                "platform": "linux/amd64"
-            },
-            {
                 "digest": "sha256:3392526162619b2879841de68549cdaf68a9397dd0dda190f338c07f52894c80",
                 "platform": "linux/arm64"
+            },
+            {
+                "digest": "sha256:24ecfe95bbb98cd49e1d968c204515d4033ef86621e68ce148cf1d0a5a0f8a82",
+                "platform": "linux/amd64"
             }
         ]
     }
