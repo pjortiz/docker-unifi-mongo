@@ -85,6 +85,8 @@ def get_major_versions(image_name, namespace):
             major_versions[m_version][os_version] = {'name': match_version_from_tags(ordered_tags, '^\\d+(\\.\\d+){0,2}-\\w+$'), 'tags': ordered_tags, 'platforms': [], 'meta': {'images': []}}
         major_versions[m_version][os_version]["platforms"].append(digest_info["OS/Arch"])
         major_versions[m_version][os_version]["meta"]["images"].append({'digest': digest, 'platform': digest_info["OS/Arch"]})
+        major_versions[m_version][os_version]["platforms"] = sorted(major_versions[m_version][os_version]["platforms"], key=str)
+        major_versions[m_version][os_version]["meta"]["images"] = sorted(major_versions[m_version][os_version]["meta"]["images"], key = lambda image: (isinstance(image["platform"], str), image["platform"]))
     return major_versions
 
 def get_image_os_arch(image):
