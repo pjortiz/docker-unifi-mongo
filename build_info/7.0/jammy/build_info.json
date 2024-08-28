@@ -1,10 +1,10 @@
 {
-    "name": "7.0.12-jammy",
+    "name": "7.0.14-jammy",
     "tags": [
-        "7.0.12-jammy",
+        "7.0.14-jammy",
         "7.0-jammy",
         "7-jammy",
-        "7.0.12",
+        "7.0.14",
         "latest",
         "jammy",
         "7.0",
@@ -17,11 +17,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:6d245af0e8dffc8771f3e734b4ee0bc7fcde48fcffe3bf2664592dfda8e9e6a4",
+                "digest": "sha256:24c904ccff05dcd659aae47af9bf7c8ffeba84b62099f5cd8ca10327665cc1af",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:5945eed557f9893a6cd97a5da1bf539d799e8f177f277ba9b8e9ca69fc31cf33",
+                "digest": "sha256:102aae4108502c1ba4d176f1952095e754f22f264d0ecc581d4d34dc93ec170e",
                 "platform": "linux/arm64"
             }
         ]
