@@ -5,7 +5,6 @@
         "7.0-jammy",
         "7-jammy",
         "7.0.14",
-        "jammy",
         "7.0",
         "7"
     ],
@@ -16,11 +15,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:7c7527b6cd8036e42318ce3b7db239fe975cdf31116c210b81b3579b73aa8c68",
+                "digest": "sha256:acd1a7d01d28cbf058e0fd04ef744fc5263c004d0f36a37330f465abf5007be0",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:4bf7ab82685a24504de4999e1ee560fcb560c4c59d42cb8cc79a63d360c210a2",
+                "digest": "sha256:76acddc0f6191dd83df4fdbad4b95e3798a802efbd2fe65fccfbf681e16971b2",
                 "platform": "linux/arm64"
             }
         ]
