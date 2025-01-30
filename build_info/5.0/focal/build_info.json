@@ -1,10 +1,10 @@
 {
-    "name": "5.0.30-focal",
+    "name": "5.0.31-focal",
     "tags": [
-        "5.0.30-focal",
+        "5.0.31-focal",
         "5.0-focal",
         "5-focal",
-        "5.0.30",
+        "5.0.31",
         "5.0",
         "5"
     ],
@@ -15,11 +15,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:02425a4d2150ff04e01a515388f4190d4dcc73b1912a5be5c993eda18bb07412",
+                "digest": "sha256:f7a950ee4a1cc048300cd3b3da3e939974eb8278525101ac917dbed1a3ce3d51",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:44f22afd5594be7988d5ae52350b33d00e9f9c3555a97193c98f44784d473929",
+                "digest": "sha256:64db5ac211eb53ca93f57784f9e0a270dd41dc52fecab4d9e81184f898192e02",
                 "platform": "linux/arm64"
             }
         ]
