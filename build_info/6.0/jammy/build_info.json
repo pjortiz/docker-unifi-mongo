@@ -1,10 +1,10 @@
 {
-    "name": "6.0.22-jammy",
+    "name": "6.0.23-jammy",
     "tags": [
-        "6.0.22-jammy",
+        "6.0.23-jammy",
         "6.0-jammy",
         "6-jammy",
-        "6.0.22",
+        "6.0.23",
         "6.0",
         "6"
     ],
@@ -15,11 +15,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:76b2bdc501f6d2fc2b545eab07c69667d14ee9f03036725c5e4a3082df75312e",
+                "digest": "sha256:256ec57cb439a7e80ef7dae77c4fd542222d8764be0e10a67cb706a9f5bebbfe",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:fc955a3d524ba65e0a9bbcc80b95e965f066498327aea4cdfa19266317ac584f",
+                "digest": "sha256:6adcedc5bb8cbcaf54d1f7b7fc4f6334586f0675301e185bd0a704c94329066a",
                 "platform": "linux/arm64"
             }
         ]
