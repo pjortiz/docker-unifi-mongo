@@ -19,7 +19,7 @@
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:0ced5d4945732b9c26a52382c3fde3606718a5c1981f6328d308d2018d548b53",
+                "digest": "sha256:c913fed9cd2f22198efa44049550416b8b18de4bb9009aa151f537d99b415384",
                 "platform": "linux/arm64"
             }
         ]
