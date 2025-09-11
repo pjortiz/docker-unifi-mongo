@@ -1,0 +1,29 @@
+{
+    "name": "8.0.13-noble",
+    "tags": [
+        "8.0.13-noble",
+        "8.0-noble",
+        "8-noble",
+        "8.0.13",
+        "latest",
+        "noble",
+        "8.0",
+        "8"
+    ],
+    "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:ef25168dda966e8771443df116f4ba1495fd1190ef4cc777c6231d3a280efe90",
+                "platform": "linux/amd64"
+            },
+            {
+                "digest": "sha256:1dd0c159f306bed8aad5a448e2670fd055ee488ddcc1f1d67dbc5794e2e6d30c",
+                "platform": "linux/arm64"
+            }
+        ]
+    }
+}
