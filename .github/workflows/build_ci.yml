@@ -26,7 +26,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r .github/scripts/requirements.txt
     - name: Run get-major-versions script
-      run: python .github/scripts/get-major-versions.py -i mongo --disable_windows --min_major 3 --max_major 7 --allowed_arch amd64 arm64
+      run: python .github/scripts/get-major-versions.py -i mongo --disable_windows --min_major 3 --max_major 8 --allowed_arch amd64 arm64
     - name: Check for updates
       id: updates
       run: |
