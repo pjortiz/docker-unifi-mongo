@@ -2,10 +2,8 @@
     "name": "5.0.31-focal",
     "tags": [
         "5.0.31-focal",
-        "5.0-focal",
         "5-focal",
         "5.0.31",
-        "5.0",
         "5"
     ],
     "platforms": [

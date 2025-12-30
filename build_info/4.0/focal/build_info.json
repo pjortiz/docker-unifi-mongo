@@ -2,10 +2,8 @@
     "name": "4.4.29-focal",
     "tags": [
         "4.4.29-focal",
-        "4.4-focal",
         "4-focal",
         "4.4.29",
-        "4.4",
         "4"
     ],
     "platforms": [
