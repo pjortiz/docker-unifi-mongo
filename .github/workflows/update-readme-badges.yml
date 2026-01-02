@@ -29,6 +29,7 @@ jobs:
         run: |
           # Read the generated table file and export as environment variable
           export VERSION_BADGES_TABLE="$(cat .badges_table_content.txt)"
+          export LATEST_VERSION="$(cat .badges_latest_version.txt)"
           
           # Create README from template
           envsubst < .github/templates/README.md.template > README_new.md

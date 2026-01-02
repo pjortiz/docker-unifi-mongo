@@ -9,7 +9,8 @@ BADGES_TABLE_FILE=".badges_table_content.txt"
 
 # Temporary file to store badge data
 TEMP_FILE=$(mktemp)
-trap "rm -f $TEMP_FILE" EXIT
+VERSIONS_TEMP=$(mktemp)
+trap "rm -f $TEMP_FILE $VERSIONS_TEMP" EXIT
 
 # Function to create shield badge markdown with proper escaping for shields.io
 create_badge() {
@@ -37,6 +38,12 @@ find build_info -name "build_info.json" -type f | sort | while IFS= read -r file
     # Create the badge
     badge=$(create_badge "$name")
     
+    # Strip codename from version (remove suffix after first hyphen)
+    version_no_codename="${name%%-*}"
+    if [ -n "$version_no_codename" ]; then
+        echo "$version_no_codename" >> "$VERSIONS_TEMP"
+    fi
+
     # Output: major_version|badge
     echo "${major_version}|${badge}" >> "$TEMP_FILE"
 done
@@ -80,3 +87,10 @@ done
 
 # Output just the file path - we'll read it in the workflow
 echo "$BADGES_TABLE_FILE"
+
+# Determine latest version (no codename) and write to file
+if [ -s "$VERSIONS_TEMP" ]; then
+    latest=$(sort -V "$VERSIONS_TEMP" | tail -n1)
+    echo "$latest" > .badges_latest_version.txt
+    echo ".badges_latest_version.txt"
+fi
