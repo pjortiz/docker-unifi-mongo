@@ -130,12 +130,15 @@ def handle_remove_readonly(func, path, exc):
   excvalue = exc[1]
   if func in (os.rmdir, os.remove) and excvalue.errno == errno.EACCES:
       os.chmod(path, stat.S_IRWXU| stat.S_IRWXG| stat.S_IRWXO) # 0777
-      func(path)
+      try:
+          func(path)
+      except Exception:
+          pass
   else:
       raise
 
 def del_current_build_info():
-    path = './build_info'
+    path = os.path.abspath('build_info')
     if os.path.isdir(path):
         shutil.rmtree(path, ignore_errors=False, onerror=handle_remove_readonly)
         
