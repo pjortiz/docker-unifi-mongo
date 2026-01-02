@@ -66,12 +66,12 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          
-          # Check if there are changes
-          if [ -n "$(git status --porcelain)" ]; then
-            git add README.md
+
+          # Stage README and commit only if staging created changes (ignore untracked files)
+          git add README.md
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
             git commit -m "chore: auto-update README badges from build_info"
             git push
-          else
-            echo "No changes to commit"
           fi
