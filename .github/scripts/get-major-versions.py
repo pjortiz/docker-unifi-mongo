@@ -35,7 +35,7 @@ def get_tags(image_name, namespace):
     return all_tags
 
 def get_major_version_from_tags(tags):
-    match = match_version_from_tags(tags, '^\\d+-\\w+$')
+    match = match_version_from_tags(tags, '^\\d+\\.\\d+-\\w+$')
     if match:
         version = match.split('-')
         return version[0], version[1]
@@ -63,10 +63,12 @@ def get_digest_versions(image_name, namespace):
                     digest, os, arch = get_image_os_arch(img)
                     if os and arch and digest:
                         if digest not in digest_versions:
-                            digest_versions[digest] = {'OS/Arch': f"{os}/{arch}", 'Tags': []}
+                            digest_versions[digest] = {'OS/Arch': f"{os}/{arch}", 'Tags': [], 'codenames': None}
                         digest_versions[digest]['Tags'].append(tag)
+                        if digest_versions[digest]['codenames'] is None and len(tag.split('-')) > 1:
+                            digest_versions[digest]['codenames'] = tag.split('-')[1]                
         # Filter out major versions with only single-digit tags
-        digest_versions = {digest: info for digest, info in digest_versions.items() if any(tag.split('-')[0].isdigit() for tag in info['Tags'])}
+        digest_versions = {digest: info for digest, info in digest_versions.items() if match_version_from_tags(info['Tags'], '^\\d+\\.\\d+$') and info.get('codenames') is not None and info.get('codenames') not in exclude_codenames}
         return digest_versions
     else:
         print("Failed to fetch tags from Docker Hub.")
@@ -143,6 +145,7 @@ min_major_version: int = None
 max_major_version: int = None
 allowed_arch:list = None
 exclude_arch:list = None
+exclude_codenames:list = None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -154,6 +157,7 @@ if __name__ == "__main__":
     parser.add_argument('--max_major', type=int, default=sys.maxsize)
     parser.add_argument('--allowed_arch', nargs="+", action="extend", type=str, default=[])
     parser.add_argument('--exclude_arch', nargs="+", action="extend", type=str, default=[])
+    parser.add_argument('--exclude_codenames', nargs="+", action="extend", type=str, default=[])
     args = parser.parse_args()
     
     namespace = args.namespace
@@ -164,6 +168,7 @@ if __name__ == "__main__":
     max_major_version = args.max_major
     allowed_arch = args.allowed_arch
     exclude_arch = args.exclude_arch
+    exclude_codenames = args.exclude_codenames or []
     
     print(f"disable_linux_fetching={disable_linux_fetching}")
     print(f"disable_windows_fetching={disable_windows_fetching}")
@@ -171,6 +176,7 @@ if __name__ == "__main__":
     print(f"max_major_version={max_major_version}")
     print(f"allowed_arch={allowed_arch}")
     print(f"exclude_arch={exclude_arch}")
+    print(f"exclude_codenames={exclude_codenames}")
     
     if any(i in allowed_arch for i in exclude_arch):
         raise Exception("allowed_arch and exclude_arch can not contain any matching!")

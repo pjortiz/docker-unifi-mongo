@@ -1,0 +1,59 @@
+name: Update README Badges
+
+on:
+  workflow_run:
+    workflows:
+      - "Build CI"
+    types:
+      - completed
+
+jobs:
+  update-badges:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+      
+      - name: Generate badge table
+        run: |
+          # Run the script to generate the table file
+          .github/scripts/generate-badges.sh
+      
+      - name: Create README from template
+        run: |
+          # Read the generated table file and export as environment variable
+          export VERSION_BADGES_TABLE="$(cat .badges_table_content.txt)"
+          
+          # Create README from template
+          envsubst < .github/templates/README.md.template > README_new.md
+          
+          # Verify the file was created
+          if [ ! -f README_new.md ]; then
+            echo "Error: README_new.md was not created"
+            exit 1
+          fi
+          # Replace the old README with the new one
+          mv README_new.md README.md
+      
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Check if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add README.md
+            git commit -m "chore: auto-update README badges from build_info"
+            git push
+          else
+            echo "No changes to commit"
+          fi
