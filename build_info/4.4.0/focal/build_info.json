@@ -1,0 +1,25 @@
+{
+    "name": "4.4.30-focal",
+    "tags": [
+        "4.4.30-focal",
+        "4.4-focal",
+        "4.4.30",
+        "4.4"
+    ],
+    "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:7250955b2354cc6ad3548b428628e441e34625caa39dd64906e85adf369e1942",
+                "platform": "linux/amd64"
+            },
+            {
+                "digest": "sha256:076c09c2b5f6105ce3a970621372f57bfc4f4e2c8b821a35bf5fd699f886bb95",
+                "platform": "linux/arm64"
+            }
+        ]
+    }
+}

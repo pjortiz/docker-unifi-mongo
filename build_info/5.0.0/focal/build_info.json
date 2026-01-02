@@ -1,0 +1,25 @@
+{
+    "name": "5.0.32-focal",
+    "tags": [
+        "5.0.32-focal",
+        "5.0-focal",
+        "5.0.32",
+        "5.0"
+    ],
+    "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:b2ace5ddbeb6d2e035aab54c486b8145bef83cff7bc3d518598b8449db74f3aa",
+                "platform": "linux/amd64"
+            },
+            {
+                "digest": "sha256:7166a36ef06ff8c17ac3884a33528c6a4be66ef0399a6542c42cf3f50299a35d",
+                "platform": "linux/arm64"
+            }
+        ]
+    }
+}
