@@ -83,6 +83,31 @@ jobs:
         uses: actions/checkout@v4
       - name: Pull latest
         run: git pull origin main
+      - name: Set up jq
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y jq
+      
+      - name: Generate badge table
+        run: |
+          # Run the script to generate the table file
+          .github/scripts/generate-badges.sh
+      
+      - name: Create README from template
+        run: |
+          # Read the generated table file and export as environment variable
+          export VERSION_BADGES_TABLE="$(cat .badges_table_content.txt)"
+          
+          # Create README from template
+          envsubst < .github/templates/README.md.template > README_new.md
+          
+          # Verify the file was created
+          if [ ! -f README_new.md ]; then
+            echo "Error: README_new.md was not created"
+            exit 1
+          fi
+          # Replace the old README with the new one
+          mv README_new.md README.md
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -106,5 +131,20 @@ jobs:
             ') }}
           build-args: |
             MONGO_VERSION=${{ matrix.name }}
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          
+          # Check if there are changes
+          if [ -n "$(git status --porcelain)" ]; then
+            git add README.md
+            git commit -m "chore: auto-update README badges from build_info"
+            git push
+          else
+            echo "No changes to commit"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       
