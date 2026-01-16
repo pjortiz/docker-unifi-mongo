@@ -53,7 +53,7 @@ volumes: # You can change the volumes' device path if you want, otherwise no nee
   unifi_mongo_data:
 services:
   unifi-mongo-db:
-    image: portiz93/unifi-mongo:${MONGO_VERSION:-8.2.3}    # Required MONGO_VERSION, Default "8.2.3", specify whatever Mongo version tag you need. DO NOT set 'latest' tag
+    image: portiz93/unifi-mongo:${MONGO_VERSION:-}    # Required MONGO_VERSION, Default "", specify whatever Mongo version tag you need. DO NOT set 'latest' tag
     container_name: unifi-mongo-db
     environment:
       # - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root}                    # Required only if using mongodb version < 6.0, otherwise do not set (See official Mongo image)
@@ -95,7 +95,7 @@ docker run -d \
   -e MONGO_PASS=your_mongo_password_here \
   -e MONGO_DBNAME=unifi \
   --restart unless-stopped \
-  portiz93/unifi-mongo:8.2.3
+  portiz93/unifi-mongo:
 ```
 
 _______________________________________
@@ -103,12 +103,12 @@ _______________________________________
 ## Build Your Own Image
 
 ```bash
-docker build -t unifi-mongo:8.2.3 --build-arg MONGO_VERSION=8.2.3 . 
+docker build -t unifi-mongo: --build-arg MONGO_VERSION= . 
 ```
 
 ### Adding your own scripts
 
-If you need a custom script based on your needs. After forking/clone this repo create a directory under `scripts` with your specific Mongo version tag (e.g. `scripts/8.2.3`), then add your script(s) in that new directory. Then run the above build command with your specific version.
+If you need a custom script based on your needs. After forking/clone this repo create a directory under `scripts` with your specific Mongo version tag (e.g. `scripts/`), then add your script(s) in that new directory. Then run the above build command with your specific version.
 
 ## Disclaimer
 
