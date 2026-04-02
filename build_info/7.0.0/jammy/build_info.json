@@ -15,11 +15,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:038b9c9f31c4a5b2a834a8f0e164312815ed651812aa8bca70bc1b521008409d",
+                "digest": "sha256:962538479d1ca4a25a38f63c5469b0b37aa11d7e9c84c4e10fbe07f08d0cd7a3",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:37bab937db3cab60bfc5bc2f65084171e36428cbecf851a7e947eba0335a4506",
+                "digest": "sha256:50304c932095ee574105cc83503f5d2b8c40194a438e5cc1727c6082e5e59c13",
                 "platform": "linux/arm64"
             }
         ]
