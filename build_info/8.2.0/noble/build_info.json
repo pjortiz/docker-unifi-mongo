@@ -1,11 +1,11 @@
 {
-    "name": "8.2.6-noble",
+    "name": "8.2.7-noble",
     "tags": [
-        "8.2.6-noble",
+        "8.2.7-noble",
         "8.2-noble",
         "8-noble",
         "latest",
-        "8.2.6",
+        "8.2.7",
         "noble",
         "8.2",
         "8"
@@ -17,11 +17,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:9c97228da610a4a1a407e34fe790dcdf5a4273c1e84d1c74cd2231b72881ffca",
+                "digest": "sha256:9b18c8c1470a5aebb150ce87d6386f78f29ce74b96dfe55524161065eb8d71db",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:feaab4061b34d3c6eb97afa5d89c4aebfd74914744c4c2016bc6ca78303e27f4",
+                "digest": "sha256:daeaca33ba4577c9597973b5b094acf5d55186baa7c8d5a935076a7dc92e0f04",
                 "platform": "linux/arm64"
             }
         ]
