@@ -1,9 +1,9 @@
 {
-    "name": "8.0.20-noble",
+    "name": "8.0.21-noble",
     "tags": [
-        "8.0.20-noble",
+        "8.0.21-noble",
         "8.0-noble",
-        "8.0.20",
+        "8.0.21",
         "8.0"
     ],
     "platforms": [
@@ -13,11 +13,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:972a9fa5d0f06418faa85d3f831ebba14e203a55dee5cd2dbcaf09490d2eff31",
+                "digest": "sha256:6c45016478c03f23686d347fc67c102c46bdc3778faf83634411bfb0194d954b",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:51ea5d1d0b72b8a4fc11045abd4a88794a3a190e945631d6f09bb7d378f33c70",
+                "digest": "sha256:6b9122ae472fcdd8b7df261016d52bc7c8d1939051508764f724e91c76aa8346",
                 "platform": "linux/arm64"
             }
         ]
