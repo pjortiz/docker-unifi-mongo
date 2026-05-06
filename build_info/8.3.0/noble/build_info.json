@@ -1,0 +1,25 @@
+{
+    "name": "8.3.1-noble",
+    "tags": [
+        "8.3.1-noble",
+        "8.3-noble",
+        "8.3.1",
+        "8.3"
+    ],
+    "platforms": [
+        "linux/amd64",
+        "linux/arm64"
+    ],
+    "meta": {
+        "images": [
+            {
+                "digest": "sha256:05df19581efd170b422a3dcf28ae7e2b92c66a5eeeea5d96b58331aeb65c1923",
+                "platform": "linux/amd64"
+            },
+            {
+                "digest": "sha256:b023c269febdad6a67431d3faff91b88f2000f466f1d4aae303445fb724a785b",
+                "platform": "linux/arm64"
+            }
+        ]
+    }
+}
