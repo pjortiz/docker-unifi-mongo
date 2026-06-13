@@ -1,9 +1,9 @@
 {
-    "name": "8.3.3-noble",
+    "name": "8.3.4-noble",
     "tags": [
-        "8.3.3-noble",
+        "8.3.4-noble",
         "8.3-noble",
-        "8.3.3",
+        "8.3.4",
         "8.3"
     ],
     "platforms": [
@@ -13,11 +13,11 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:6b1b16cd41a25b9823552acaae3a5516a0c9a55af3f8ff8c845fc603fd566ec5",
+                "digest": "sha256:c00dfdf15a19a25d427485b1134643ad7efd2a572e61255cefd51e488f87d04f",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:9a528e260c13b7b6034bd79b6d62091dfc472b6a3ca9810fb07d8f134131363a",
+                "digest": "sha256:07e3fa2787a6edd8b66dbbbf63cb5baacedf70bf9f05e72505d793e991d88b54",
                 "platform": "linux/arm64"
             }
         ]
