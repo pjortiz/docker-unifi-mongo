@@ -140,7 +140,7 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "chore: auto-update README badges from build_info"
-            git push
+            git push origin main
           fi
 
       
