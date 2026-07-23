@@ -70,42 +70,59 @@ jobs:
         REGISTRY_IMAGE: ${{ env.REGISTRY_IMAGE }}
         UPDATED_BUILD_INFO_FILES: ${{ needs.get-latest-build-info.outputs.updated_build_info_files }}
 
+  prepare-readme:
+    needs: get-latest-build-info
+    if: needs.get-latest-build-info.outputs.build_info_updated == 'true'
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+    - name: Set up jq
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y jq
+    - name: Generate badge table
+      run: |
+        .github/scripts/generate-badges.sh
+    - name: Create README from template
+      run: |
+        export VERSION_BADGES_TABLE="$(cat .badges_table_content.txt)"
+        export LATEST_VERSION="$(cat .badges_latest_version.txt 2>/dev/null || true)"
+
+        envsubst < .github/templates/README.md.template > README_new.md
+
+        if [ ! -f README_new.md ]; then
+          echo "Error: README_new.md was not created"
+          exit 1
+        fi
+        mv README_new.md README.md
+    - name: Upload generated README artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: generated-readme
+        path: README.md
+
   build:
-    needs: generate-build-jobs
+    needs: [generate-build-jobs, prepare-readme]
     if: needs.generate-build-jobs.outputs.strategy_created == 'true'
-    strategy: ${{ fromJson(needs.generate-build-jobs.outputs.strategy) }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.generate-build-jobs.outputs.strategy) }}
+    continue-on-error: true
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Pull latest
-        run: git pull origin main
+      - name: Download generated README
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-readme
+          path: .
       - name: Set up jq
         run: |
           sudo apt-get update
           sudo apt-get install -y jq
-      
-      - name: Generate badge table
-        run: |
-          # Run the script to generate the table file
-          .github/scripts/generate-badges.sh
-      
-      - name: Create README from template
-        run: |
-          # Read the generated table file and export as environment variable
-          export VERSION_BADGES_TABLE="$(cat .badges_table_content.txt)"
-          
-          # Create README from template
-          envsubst < .github/templates/README.md.template > README_new.md
-          
-          # Verify the file was created
-          if [ ! -f README_new.md ]; then
-            echo "Error: README_new.md was not created"
-            exit 1
-          fi
-          # Replace the old README with the new one
-          mv README_new.md README.md
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
       - name: Set up Docker Buildx
@@ -129,12 +146,51 @@ jobs:
             ') }}
           build-args: |
             MONGO_VERSION=${{ matrix.name }}
-      - name: Commit and push changes
+      - name: Upload success marker
+        if: success()
+        run: |
+          echo "build success for ${{ matrix.name }}" > build-success-${{ matrix.name }}.txt
+      - name: Upload build success artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-success-${{ matrix.name }}
+          path: build-success-${{ matrix.name }}.txt
+
+  commit-readme:
+    needs: build
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Download generated README
+        uses: actions/download-artifact@v4
+        with:
+          name: generated-readme
+          path: .
+      - name: Download build success artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: ./build-success
+      - name: Determine whether any builds succeeded
+        id: build-status
+        run: |
+          if ls ./build-success/build-success-*.txt >/dev/null 2>&1 || find ./build-success -type f -name 'build-success-*.txt' | grep -q '.'; then
+            echo "successful_builds=true" >> "$GITHUB_OUTPUT"
+            echo "Found successful build artifact(s):"
+            find ./build-success -type f -name 'build-success-*.txt' -print
+          else
+            echo "successful_builds=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Commit and push README changes
+        if: steps.build-status.outputs.successful_builds == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
 
-          # Stage README and commit only if staging created changes (ignore untracked files)
           git add README.md
           if git diff --cached --quiet; then
             echo "No changes to commit"
@@ -143,5 +199,3 @@ jobs:
             git pull origin main --rebase
             git push origin main
           fi
-
-      
