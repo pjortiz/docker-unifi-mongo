@@ -158,8 +158,8 @@ jobs:
           path: build-success-${{ matrix.name }}.txt
 
   commit-readme:
-    needs: build
-    if: always()
+    needs: [prepare-readme, build]
+    if: needs.prepare-readme.result == 'success' && needs.build.result != 'skipped'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
