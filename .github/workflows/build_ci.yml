@@ -16,9 +16,9 @@ jobs:
       updated_build_info_files: ${{ steps.updates.outputs.updated_build_info_files }}
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v7
       with:
         python-version: '3.12'
     - name: Install Python dependencies
@@ -56,7 +56,7 @@ jobs:
       strategy: ${{ steps.generate-build-jobs.outputs.strategy }}
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
     - name: Pull latest
       run: git pull origin main
     - name: Run generate_build_jobs script
@@ -76,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
     - name: Set up jq
       run: |
         sudo apt-get update
@@ -97,7 +97,7 @@ jobs:
         fi
         mv README_new.md README.md
     - name: Upload generated README artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         name: generated-readme
         path: README.md
@@ -113,9 +113,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: Download generated README
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: generated-readme
           path: .
@@ -152,7 +152,7 @@ jobs:
           echo "build success for ${{ matrix.name }}" > build-success-${{ matrix.name }}.txt
       - name: Upload build success artifact
         if: success()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: build-success-${{ matrix.name }}
           path: build-success-${{ matrix.name }}.txt
@@ -163,16 +163,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Download generated README
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: generated-readme
           path: .
       - name: Download build success artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           path: ./build-success
       - name: Determine whether any builds succeeded
