@@ -80,6 +80,8 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+    - name: Pull latest
+      run: git pull origin main
     - name: Set up jq
       run: |
         sudo apt-get update
@@ -155,8 +157,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Pull latest
+        run: git pull origin main
       - name: Download generated README
         uses: actions/download-artifact@v7
         with:
@@ -164,14 +166,14 @@ jobs:
           path: .
       - name: Commit and push README changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
 
           git add README.md
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else
-            git commit -m "chore: auto-update README badges from build_info"
+            git commit -m "Update README.md badges from build_info [Build CI]"
             git pull origin main --rebase
             git push origin main
           fi
