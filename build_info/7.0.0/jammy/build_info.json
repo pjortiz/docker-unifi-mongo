@@ -1,10 +1,10 @@
 {
-    "name": "7.0.39-jammy",
+    "name": "7.0.40-jammy",
     "tags": [
-        "7.0.39-jammy",
+        "7.0.40-jammy",
         "7.0-jammy",
         "7-jammy",
-        "7.0.39",
+        "7.0.40",
         "7.0",
         "7"
     ],
@@ -15,13 +15,14 @@
     "meta": {
         "images": [
             {
-                "digest": "sha256:e68ebd505eb6b5c5b5c6c3486bd208fed62e2765b9d7f2f5262fb172481df26f",
+                "digest": "sha256:8ef27524b4cde51b9f07bb0827a56d02c6d3b148d0b7d0ca8ff4dfd57351ff4f",
                 "platform": "linux/amd64"
             },
             {
-                "digest": "sha256:640a48a0e5a071bba50bcc597e328615c2d77d4b72ee5e1471e63d792d0ed4b5",
+                "digest": "sha256:fd08932ce14f6c8e34f565782c60fdd6cac00b4f00fb08a6ca6301bcd3324cd2",
                 "platform": "linux/arm64"
             }
         ]
-    }
+    },
+    "last_updated": "2026-08-12T04:03:49.308420+00:00"
 }
