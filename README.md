@@ -21,7 +21,7 @@ _______________________________________
 
 | 4.x | 5.x | 6.x | 7.x | 8.x  |
 | - | - | - | - | -  |
-|[![tag -  4.4.30-focal](https://img.shields.io/badge/tag-4.4.30--focal-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/4.4.30-focal)|[![tag -  5.0.33-focal](https://img.shields.io/badge/tag-5.0.33--focal-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/5.0.33-focal)|[![tag -  6.0.28-jammy](https://img.shields.io/badge/tag-6.0.28--jammy-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/6.0.28-jammy)|[![tag -  7.0.39-jammy](https://img.shields.io/badge/tag-7.0.39--jammy-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/7.0.39-jammy)|[![tag -  8.0.28-noble](https://img.shields.io/badge/tag-8.0.28--noble-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/8.0.28-noble)<br>[![tag -  8.2.12-noble](https://img.shields.io/badge/tag-8.2.12--noble-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/8.2.12-noble)<br>[![tag -  8.3.7-noble](https://img.shields.io/badge/tag-8.3.7--noble-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/8.3.7-noble)|
+|[![tag -  4.4.30-focal](https://img.shields.io/badge/tag-4.4.30--focal-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/4.4.30-focal)|[![tag -  5.0.33-focal](https://img.shields.io/badge/tag-5.0.33--focal-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/5.0.33-focal)|[![tag -  6.0.28-jammy](https://img.shields.io/badge/tag-6.0.28--jammy-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/6.0.28-jammy)|[![tag -  7.0.40-jammy](https://img.shields.io/badge/tag-7.0.40--jammy-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/7.0.40-jammy)|[![tag -  8.0.29-noble](https://img.shields.io/badge/tag-8.0.29--noble-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/8.0.29-noble)<br>[![tag -  8.2.12-noble](https://img.shields.io/badge/tag-8.2.12--noble-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/8.2.12-noble)<br>[![tag -  8.3.8-noble](https://img.shields.io/badge/tag-8.3.8--noble-blue?logo=Docker)](https://hub.docker.com/layers/portiz93/unifi-mongo/8.3.8-noble)|
 
 _______________________________________
 
@@ -53,7 +53,7 @@ volumes: # You can change the volumes' device path if you want, otherwise no nee
   unifi_mongo_data:
 services:
   unifi-mongo-db:
-    image: portiz93/unifi-mongo:${MONGO_VERSION:-}    # Required MONGO_VERSION, Default "", specify whatever Mongo version tag you need. DO NOT set 'latest' tag
+    image: portiz93/unifi-mongo:${MONGO_VERSION:-8.3.8}    # Required MONGO_VERSION, Default "8.3.8", specify whatever Mongo version tag you need. DO NOT set 'latest' tag
     container_name: unifi-mongo-db
     environment:
       # - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root}                    # Required only if using mongodb version < 6.0, otherwise do not set (See official Mongo image)
@@ -95,7 +95,7 @@ docker run -d \
   -e MONGO_PASS=your_mongo_password_here \
   -e MONGO_DBNAME=unifi \
   --restart unless-stopped \
-  portiz93/unifi-mongo:
+  portiz93/unifi-mongo:8.3.8
 ```
 
 _______________________________________
@@ -103,12 +103,12 @@ _______________________________________
 ## Build Your Own Image
 
 ```bash
-docker build -t unifi-mongo: --build-arg MONGO_VERSION= . 
+docker build -t unifi-mongo:8.3.8 --build-arg MONGO_VERSION=8.3.8 . 
 ```
 
 ### Adding your own scripts
 
-If you need a custom script based on your needs. After forking/clone this repo create a directory under `scripts` with your specific Mongo version tag (e.g. `scripts/`), then add your script(s) in that new directory. Then run the above build command with your specific version.
+If you need a custom script based on your needs. After forking/clone this repo create a directory under `scripts` with your specific Mongo version tag (e.g. `scripts/8.3.8`), then add your script(s) in that new directory. Then run the above build command with your specific version.
 
 ## Disclaimer
 
