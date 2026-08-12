@@ -27,6 +27,9 @@ jobs:
         pip install -r .github/scripts/requirements.txt
     - name: Run get-major-versions script
       run: python .github/scripts/get-major-versions.py -i mongo --disable_windows --min_major 3 --max_major 8 --allowed_arch amd64 arm64 --exclude_codenames jessie stretch xenial bionic wheezy
+      env:
+        DOCKERHUB_USERNAME: ${{ vars.DOCKERHUB_USERNAME }}
+        DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Check for updates
       id: updates
       run: |
