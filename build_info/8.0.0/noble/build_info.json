@@ -15,6 +15,8 @@
         "linux/amd64",
         "linux/amd64",
         "linux/amd64",
+        "linux/amd64",
+        "linux/arm64",
         "linux/arm64",
         "linux/arm64",
         "linux/arm64",
@@ -59,6 +61,10 @@
                 "platform": "linux/amd64"
             },
             {
+                "digest": "sha256:4c7d0fb8fde0681e2ae443b0b09371ec9c31a81caab05af9579458bfcb30d656",
+                "platform": "linux/amd64"
+            },
+            {
                 "digest": "sha256:5815b078273075ed210b35e67063ac7dc8e34c62c35ca5c845c4f73d568c5b2b",
                 "platform": "linux/arm64"
             },
@@ -89,8 +95,12 @@
             {
                 "digest": "sha256:f7b146ec8059a89b16b2290c8d6e27c2eebf16f8f8884e6d56c248a8770c6fd1",
                 "platform": "linux/arm64"
+            },
+            {
+                "digest": "sha256:8d7ff5cd8f6034e8cdcf52f57f2cd0296de428cd258f19bcfc87ca3c1ab0bf76",
+                "platform": "linux/arm64"
             }
         ]
     },
-    "last_updated": "2026-10-14T09:56:54.767812+00:00"
+    "last_updated": "2026-10-17T09:02:43.543230+00:00"
 }
